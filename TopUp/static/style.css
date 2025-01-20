@@ -1,0 +1,64 @@
+    /* Navbar */
+
+    .navbar-toggler {
+        order: -1; /* Pindahkan tombol ke kiri */
+        margin-left: 0; /* Menghapus margin default dari kanan */
+    }
+
+    .bg-gold {
+        background: linear-gradient(to bottom, #0f0c29, #24243e);
+    }
+    
+    .navbar-dark .navbar-nav .nav-link {
+        color: #ffffff; /* Warna teks navbar */
+    }
+    
+    .navbar-dark .navbar-nav .nav-link:hover {
+        color: #ffd700; /* Warna teks navbar saat hover */
+    }
+    
+    /* Offcanvas (Sidebar) Menu */
+    .offcanvas-start {
+        width: 200px;  /* Lebar menu samping */
+        background-color: #1e3c72;
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    .offcanvas-body {
+        padding: 20px;
+    }
+    
+    .offcanvas-header {
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .offcanvas-body .nav-item {
+        margin-bottom: 15px;
+        color: #ffffff;
+    }
+    
+    .offcanvas-body .nav-link {
+        color: #ffd700;
+        font-size: 18px;
+    }
+    
+    .offcanvas-body .nav-link:hover {
+        color: #ffffff;
+    }
+    
+    /* Responsif untuk perangkat kecil */
+    @media (max-width: 768px) {
+        .navbar .navbar-nav {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    
+    /* Navbar Emas */
+    .navbar-dark .navbar-nav .nav-link {
+        color: #ffffff;
+    }
+    
+    .navbar-dark .navbar-nav .nav-link:hover {
+        color: #ffd700;
+    }

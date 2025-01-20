@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>EfhaeStore</h1>
+        </header>
+        <form method="POST">
+            {% csrf_token %}
+            <h2>Daftar</h2>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" placeholder="Konfirmasi Password" required>
+            <button type="submit">Daftar</button>
+            <p>Sudah punya akun? <a href="{% url 'login' %}">Login</a></p>
+        </form>
+    </div>
+</body>
+</html>
+<style>
+    /* Global Styles */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(to bottom, #1e3c72, #2a5298, #24243e);
+        background-size: cover;
+        color: white;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        animation: gradientMove 6s ease infinite;
+    }
+    
+    /* Animating the gradient background */
+    @keyframes gradientMove {
+        0% {
+            background: linear-gradient(to bottom, #1e3c72, #2a5298, #24243e);
+        }
+        50% {
+            background: linear-gradient(to bottom, #24243e, #1e3c72, #2a5298);
+        }
+        100% {
+            background: linear-gradient(to bottom, #2a5298, #24243e, #1e3c72);
+        }
+    }
+    
+    .container {
+        width: 100%;
+        max-width: 500px;
+        padding: 30px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 15px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        animation: fadeIn 1s ease;
+    }
+    
+    /* Responsif untuk form */
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    /* Responsif untuk input */
+    form input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 8px;
+        font-size: 1em;
+        transition: all 0.3s ease;
+    }
+    
+    form input:focus {
+        outline: none;
+        border: 2px solid #2a5298;
+        box-shadow: 0 0 10px rgba(42, 82, 152, 0.7);
+    }
+    
+    /* Responsif untuk button */
+    form button {
+        width: 100%;
+        padding: 15px;
+        background-color: #2a5298;
+        border: none;
+        border-radius: 8px;
+        font-size: 1.2em;
+        color: white;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    form button:hover {
+        background-color: #1e3c72;
+    }
+    
+    /* Responsif untuk text link */
+    form p {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 1em;
+    }
+    
+    form p a {
+        color: #f9f9f9;
+        text-decoration: none;
+        font-weight: bold;
+        transition: color 0.3s ease;
+    }
+    
+    form p a:hover {
+        color: #2a5298;
+    }
+    
+    /* Animations */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes slideIn {
+        0% {
+            transform: translateY(-50px);
+        }
+        100% {
+            transform: translateY(0);
+        }
+    }
+    
+    /* Responsif untuk layar besar (desktop) */
+    @media (min-width: 768px) {
+        body {
+            padding: 0;
+        }
+    
+        .container {
+            max-width: 600px;
+            padding: 30px;
+        }
+    
+        header h1 {
+            font-size: 2.5em;
+        }
+    
+        form input, form button {
+            padding: 15px;
+            font-size: 1.1em;
+        }
+    }
+    
+    /* Responsif untuk layar kecil (ponsel) */
+    @media (max-width: 480px) {
+        header h1 {
+            font-size: 1.8em;
+        }
+    
+        form input, form button {
+            padding: 10px;
+            font-size: 0.9em;
+        }
+    
+        form p {
+            font-size: 0.9em;
+        }
+    
+        .container {
+            width: 100%;
+            padding: 20px;
+        }
+    
+        /* Menyesuaikan jarak antar elemen */
+        form input, form button {
+            font-size: 0.9em;
+        }
+    }
+    
+
+/* Responsif untuk layar besar (desktop) */
+@media (min-width: 768px) {
+    body {
+        padding: 0;
+    }
+
+    .container {
+        max-width: 600px;
+        padding: 30px;
+    }
+
+    header h1 {
+        font-size: 2.5em;
+    }
+
+    form input, form button {
+        padding: 15px;
+        font-size: 1.1em;
+    }
+}
+
+/* Responsif untuk layar kecil (ponsel) */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.1em;
+    }
+
+    form input, form button {
+        padding: 6px;
+        font-size: 0.9em;
+    }
+
+    form p {
+        font-size: 0.7em;
+    }
+}
+</style>

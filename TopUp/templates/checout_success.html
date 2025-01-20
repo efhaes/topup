@@ -1,0 +1,244 @@
+
+{% load static %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+{% block title %}
+<!-- Navbar dengan tombol hamburger untuk mobile -->
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-gold">
+    <div class="container">
+        <a class="navbar-brand" href="/">EfhaeStore</a>
+
+        <!-- Tombol Hamburger untuk Mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar untuk Desktop -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="#">{{ user.username }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                {% endif %}
+                <li class="nav-item"><a class="nav-link" href="{{ request.META.HTTP_REFERER }}">Kembali</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Offcanvas Sidebar -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">EfhaeStore</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="navbar-nav ms-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="#">{{ user.username }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+            {% endif %}
+            <li class="nav-item"><a class="nav-link" href="{{ request.META.HTTP_REFERER }}">Kembali</a></li>
+        </ul>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg rounded-3">
+        <div class="card-body">
+            <h5 class="text-center">Terima kasih Mas {{ user.username }}</h5>
+            <hr>
+            <p class="lead"><strong>ID TRANSAKSI:</strong> {{ transaction.id }}</p>
+            <p class="lead"><strong>PRODUK:</strong> {{ transaction.product.name }}</p>
+            <p class="lead"><strong>JUMLAH DIAMONDS:</strong> {{ transaction.product.diamond_amount }}</p>
+            <p class="lead"><strong>HARGA:</strong> {{ transaction.product.price }}</p>
+            <p class="lead"><strong>Game ID:</strong> {{ transaction.game_id }}</p>
+            <p class="lead"><strong>Zone ID:</strong> {{ transaction.zone_id }}</p>
+            <p class="lead"><strong>Status:</strong> {{ transaction.status }}</p>
+            <p class="lead">Pembayaran Anda sedang diproses.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<style>
+    /* Warna Teks */
+    body, .card-title, .card p {
+        color: #ffd700;
+    }
+
+    /* Global Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(to bottom, #1e3c72, #2a5298, #24243e);
+        margin: 0;
+        padding: 0;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: #ffd700;
+    }
+
+    /* Card Styles */
+    .card {
+        max-width: 800px;
+        margin: 30px auto;
+        padding: 20px;
+        border-radius: 12px;
+        background: linear-gradient(to bottom, #263a69, #838db1);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: #ffd700;
+        margin-bottom: 15px;
+    }
+
+    .card p {
+        font-size: 1.1rem;
+        color: #ffd700;
+        margin-bottom: 8px;
+        border-bottom: 2px dashed #ddd; /* Garis putus-putus di bawah */
+        padding-bottom: 8px; /* Menambahkan ruang bawah untuk menjaga jarak dengan garis */
+    }
+
+    /* Tombol */
+    .card .btn {
+        padding: 10px 20px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        background-color: #ffd700;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .card .btn:hover {
+        background-color: #ffd700;
+    }
+
+    /* Global Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(to bottom, #1e3c72, #2a5298, #24243e);
+        margin: 0;
+        padding: 0;
+    }
+    
+    .navbar-toggler {
+        order: -1; /* Pindahkan tombol ke kiri */
+        margin-left: 0; /* Menghapus margin default dari kanan */
+    }
+    /* Navbar */
+    .bg-gold {
+        background: linear-gradient(to bottom, #0f0c29, #24243e);
+    }
+    
+    .navbar-dark .navbar-nav .nav-link {
+        color: #ffffff; /* Warna teks navbar */
+    }
+    
+    .navbar-dark .navbar-nav .nav-link:hover {
+        color: #ffd700; /* Warna teks navbar saat hover */
+    }
+    
+    /* Offcanvas (Sidebar) Menu */
+    .offcanvas-start {
+        width: 250px;  /* Lebar menu samping */
+        background-color: #1e3c72;
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    .offcanvas-body {
+        padding: 20px;
+        
+    }
+    
+    .offcanvas-header {
+        border-bottom: 1px solid #ddd;
+        color: #ffffff;
+    }
+    
+    .offcanvas-body .nav-item {
+        margin-bottom: 15px;
+    }
+    
+    .offcanvas-body .nav-link {
+        color: #ffd700;
+        font-size: 18px;
+    }
+    
+    .offcanvas-body .nav-link:hover {
+        color: #ffffff;
+    }
+    
+    /* Responsif untuk perangkat kecil */
+    @media (max-width: 768px) {
+        .navbar .navbar-nav {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+    
+    /* Navbar Emas */
+    .navbar-dark .navbar-nav .nav-link {
+        color: #ffffff;
+    }
+    
+    .navbar-dark .navbar-nav .nav-link:hover {
+        color: #ffd700;
+    }
+    
+    /* Hover effects on card */
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 992px) {
+        .card {
+            margin: 20px;
+            padding: 15px;
+        }
+        .card-title {
+            font-size: 1.2rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .card {
+            margin: 15px;
+            padding: 12px;
+        }
+        .card-title {
+            font-size: 1rem;
+        }
+
+        /* Navbar adjustments */
+        .navbar-brand {
+            font-size: 1.1rem;
+        }
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>

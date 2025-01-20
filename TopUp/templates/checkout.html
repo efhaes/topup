@@ -1,0 +1,245 @@
+{% load static %}
+{% load custom_filters %}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+{% block title %}
+<title>Bayar Mas {{ user.username }} | EfhaeStore</title>
+{% endblock %}
+
+{% block content %}
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-gold">
+    <div class="container">
+        <a class="navbar-brand" href="/">EfhaeStore</a>
+
+        <!-- Tombol Hamburger untuk Mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar untuk Desktop -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="#">{{ user.username }}</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+                {% endif %}
+                <li class="nav-item"><a class="nav-link" href="{{ request.META.HTTP_REFERER }}">Kembali</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- Offcanvas Sidebar -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">EfhaeStore</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="navbar-nav ms-auto">
+            {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link" href="#">{{ user.username }}</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'login' %}">Login</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'register' %}">Register</a></li>
+            {% endif %}
+            <li class="nav-item"><a class="nav-link" href="{{ request.META.HTTP_REFERER }}">Kembali</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<h1 class="text-gold mb-5 text-center">Bayar Mas {{ user.username }}</h1>
+<div class="card checkout-card">
+    <div class="card-body">
+        <h5 class="card-title text-gold">{{ product.name}}</h5>
+        <p class="card-text text-gold"> Harga : {{ product.price|format_rupiah }}</p>
+        <p class="card-text text-gold">Total Diamonds: {{ product.diamond_amount }}</p>
+
+        <form method="post" class="checkout-form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="game_id">Game ID</label>
+                <input type="text" name="game_id" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="zone_id">Zone ID</label>
+                <input type="text" name="zone_id" class="form-control" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="payment_method">Metode Pembayaran</label>
+                <select name="payment_method" id="payment_method" class="form-control" required>
+                    <option value="E-wallet">E-wallet</option>
+                    <option value="Bank Transfer">Bank Transfer</option>
+                </select>
+            </div>
+        
+            <div id="ewallet-options" class="form-group" style="display:none;">
+                <label for="ewallet">Pilih E-wallet</label>
+                <select name="ewallet" class="form-control">
+                    <option value="DANA">DANA</option>
+                    <option value="OVO">OVO</option>
+                    <option value="GoPay">GoPay</option>
+                </select>
+            </div>
+        
+            <div id="bank-options" class="form-group" style="display:none;">
+                <label for="bank">Pilih Bank</label>
+                <select name="bank" class="form-control">
+                    <option value="BRI">BRI</option>
+                    <option value="BCA">BCA</option>
+                    <option value="BTN">BTN</option>
+                </select>
+            </div>
+        
+            <button type="submit" class="btn btn-primary">Konfirmasi Pembayaran</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    document.getElementById('payment_method').addEventListener('change', function () {
+        const paymentMethod = this.value;
+        if (paymentMethod === 'E-wallet') {
+            document.getElementById('ewallet-options').style.display = 'block';
+            document.getElementById('bank-options').style.display = 'none';
+        } else if (paymentMethod === 'Bank Transfer') {
+            document.getElementById('bank-options').style.display = 'block';
+            document.getElementById('ewallet-options').style.display = 'none';
+        }
+    });
+</script>
+
+{% endblock %}
+
+<style>
+    body {
+        background: linear-gradient(to bottom, #1e3c72, #2a5298, #24243e);
+    }
+    h1.text-gold{
+        color:#ffd700;
+    }
+    @media (max-width: 768px) {
+        h1.text-gold {
+            font-size: 1.8rem;
+        }
+
+        .checkout-card {
+            max-width: 90%;
+            padding: 15px;
+        }
+
+        .checkout-form input, 
+        .checkout-form select, 
+        .checkout-form button {
+            font-size: 0.9rem;
+            padding: 10px;
+        }
+
+        .checkout-form {
+            margin-top: 20px;
+        }
+
+        .offcanvas-body .nav-link {
+            font-size: 16px;
+        }
+    }
+
+    .navbar-toggler {
+        order: -1; 
+    }
+
+    .bg-gold {
+        background: linear-gradient(to bottom, #0f0c29, #24243e);
+    }
+
+    .navbar-dark .navbar-nav .nav-link {
+        color: #ffffff;
+    }
+
+    .navbar-dark .navbar-nav .nav-link:hover {
+        color: #ffd700;
+    }
+
+    .offcanvas-start {
+        width: 250px;  
+        background-color: #1e3c72;  
+    }
+
+    .offcanvas-body .nav-item {
+        margin-bottom: 15px;
+        
+    }
+    .offcanvas-header {
+        border-bottom: 1px solid #ddd;
+        color: #ffffff;
+    }
+    .offcanvas-body .nav-link {
+        color: #ffd700;
+        font-size: 18px;
+    }
+
+    .offcanvas-body .nav-link:hover {
+        color: #ffffff;
+    }
+
+    .checkout-card {
+        border-radius: 15px;
+        background-color: #333333;
+        color: #ffd700;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        margin: 0 auto;
+        max-width: 500px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .checkout-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    }
+
+    .checkout-form input, 
+    .checkout-form select, 
+    .checkout-form button {
+        width: 100%;
+        padding: 12px;
+        font-size: 1rem;
+        border-radius: 8px;
+        background-color: #444444;
+        border: 1px solid #555555;
+        color: #ffd700;
+        margin: 10px 0;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    .checkout-form input:focus,
+    .checkout-form select:focus {
+        outline: none;
+        border-color: #ffd700;
+        box-shadow: 0 0 5px #ffd700;
+    }
+
+    .checkout-form button {
+        background-color: #ffd700;
+        color: #2a2a2a;
+        border: none;
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .checkout-form button:hover {
+        background-color: #d4af37;
+        transform: translateY(-3px);
+    }
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
