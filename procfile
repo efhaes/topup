@@ -1,0 +1,1 @@
+web: gunicorn GAMES.wsgi --log-file -
