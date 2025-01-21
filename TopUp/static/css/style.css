@@ -1,29 +1,23 @@
-/* Background Color */
-body {
-    background: linear-gradient(to bottom, #1e3c72, #2a5298, #24243e);
-
-
-    color: #ffffff;
-}
-
-/* Gold Text Color */
-.text-gold {
-    color: #ffd700;
-}
-
 /* Global Styles */
 body {
     font-family: 'Arial', sans-serif;
     background: linear-gradient(to bottom, #1e3c72, #2a5298, #24243e);
+    color: #ffffff;
     margin: 0;
     padding: 0;
 }
 
-/* Navbar */
+/* Text Colors */
+.text-gold {
+    color: #ffd700;
+}
 
+/* Navbar */
 .navbar-toggler {
-    order: -1; /* Pindahkan tombol ke kiri */
-    margin-left: 0; /* Menghapus margin default dari kanan */
+    position: absolute;
+    left: 0; /* Pindahkan ke kiri pojok */
+    margin-left: 0;
+    order: -1;
 }
 
 .bg-gold {
@@ -31,16 +25,21 @@ body {
 }
 
 .navbar-dark .navbar-nav .nav-link {
-    color: #ffffff; /* Warna teks navbar */
+    color: #ffffff;
 }
 
 .navbar-dark .navbar-nav .nav-link:hover {
-    color: #ffd700; /* Warna teks navbar saat hover */
+    color: #ffd700;
 }
 
-/* Offcanvas (Sidebar) Menu */
+.navbar {
+    padding: 10px 15px;
+    position: relative;
+}
+
+/* Offcanvas Menu */
 .offcanvas-start {
-    width: 200px;  /* Lebar menu samping */
+    width: 250px;
     background-color: #1e3c72;
     transition: transform 0.3s ease-in-out;
 }
@@ -56,6 +55,7 @@ body {
 
 .offcanvas-body .nav-item {
     margin-bottom: 15px;
+    color: #ffffff;
 }
 
 .offcanvas-body .nav-link {
@@ -67,103 +67,261 @@ body {
     color: #ffffff;
 }
 
-/* Responsif untuk perangkat kecil */
-@media (max-width: 768px) {
-    .navbar .navbar-nav {
-        display: flex;
-        flex-direction: column;
-    }
-}
-
-/* Navbar Emas */
-.navbar-dark .navbar-nav .nav-link {
-    color: #ffffff;
-}
-
-.navbar-dark .navbar-nav .nav-link:hover {
-    color: #ffd700;
-}
-
-
-/* Button Styles */
+/* Buttons */
 .btn-gold {
     background-color: #ffd700;
     border-color: #ffd700;
     background: linear-gradient(to bottom, #1e3c72, #2a5298, #24243e);
-
 }
+
 .btn-gold:hover {
     background-color: #d4af37;
     border-color: #d4af37;
 }
 
-/* Card Body Background Color */
+/* Cards */
 .card-body.bg-dark {
     background: linear-gradient(to bottom, #263a69, #838db1);
-
 }
 
-/* Card Border */
 .card {
     border: 1px solid #444444;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Card Hover Effect */
-.game-card:hover {
-    transform: translateY(-10px);  /* Mengangkat card */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);  /* Tambahkan bayangan */
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Hero Section */
 .bg-dark {
     background: linear-gradient(to bottom, #1e3c72, #2a5298, #24243e);
-    
-    /* Responsif untuk layar besar (desktop) */
+}
+
+/* Slider Styles */
+.carousel-item {
+    height: 500px; /* Tinggi slider */
+    background-size: cover;
+    background-position: center;
+    transition: background 0.5s ease-in-out;
+}
+
+.carousel-item img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    filter: brightness(80%); /* Efek gelap pada gambar */
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 20%;
+    text-align: center;
+    color: #ffd700; /* Warna emas untuk teks */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.carousel-caption h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+.carousel-caption p {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    animation: fadeInUp 1.5s ease-in-out;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5); /* Latar belakang hitam transparan untuk tombol */
+    border-radius: 50%;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Styles */
 @media (min-width: 768px) {
-body {
-    padding: 0;
+    body {
+        padding: 0;
+    }
+
+    .container {
+        max-width: 600px;
+        padding: 30px;
+    }
+
+    header h1 {
+        font-size: 2.5em;
+    }
+
+    form input, form button {
+        padding: 15px;
+        font-size: 1.1em;
+    }
 }
 
-.container {
-    max-width: 600px;
-    padding: 30px;
+/* Navbar */
+.navbar-toggler {
+    position: absolute;
+    left: 10px; /* Sedikit jarak dari pojok kiri */
+    top: 10px;
+    order: -1;
 }
 
-header h1 {
-    font-size: 2.5em;
-}
-
-form input, form button {
-    padding: 15px;
-    font-size: 1.1em;
-}
-}
-
-/* Responsif untuk layar kecil (ponsel) */
-@media (max-width: 480px) {
-header h1 {
-    font-size: 1.8em;
-}
-
-form input, form button {
+.navbar {
     padding: 10px;
-    font-size: 0.9em;
 }
 
-form p {
-    font-size: 0.9em;
-}
+.navbar-dark .navbar-nav .nav-link {
+    font-size: 16px;
+    padding: 5px 10px;
 }
 
-
+.offcanvas-start {
+    width: 250px;
 }
-/* Footer Styles */
+
+.offcanvas-body .nav-link {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+/* Card Styles */
+.card {
+    margin-bottom: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card img {
+    object-fit: cover;
+    width: 100%;
+    height: auto;
+    max-height: 180px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    /* Navbar */
+    .navbar {
+        padding: 5px 10px;
+    }
+
+    .navbar-toggler {
+        left: 10px;
+        top: 8px;
+    }
+
+    .offcanvas-body {
+        padding: 15px;
+    }
+
+    .offcanvas-body .nav-link {
+        font-size: 14px;
+    }
+
+    /* Card Grid */
+    .col-md-4 {
+        flex: 0 0 50%; /* Dua kolom di layar kecil */
+        max-width: 50%;
+    }
+
+    .card img {
+        max-height: 150px; /* Kurangi tinggi gambar pada layar kecil */
+    }
+
+    .card-body h5 {
+        font-size: 14px;
+    }
+
+    .card-body p {
+        font-size: 12px;
+    }
+
+    .btn {
+        font-size: 12px;
+        padding: 5px 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Navbar */
+    .navbar {
+        padding: 5px 5px;
+    }
+
+    .navbar-toggler {
+        left: 5px;
+        top: 5px;
+    }
+
+    .offcanvas-body {
+        padding: 10px;
+    }
+
+    .offcanvas-body .nav-link {
+        font-size: 12px;
+    }
+
+    /* Card Grid */
+    .col-md-4 {
+        flex: 0 0 100%; /* Satu kolom di layar sangat kecil */
+        max-width: 100%;
+    }
+
+    .card img {
+        max-height: 120px;
+    }
+
+    .card-body h5 {
+        font-size: 12px;
+    }
+
+    .card-body p {
+        font-size: 10px;
+    }
+
+    .btn {
+        font-size: 10px;
+        padding: 4px 8px;
+    }
+}
+
+/* Footer */
 footer {
-    background: linear-gradient(to bottom, #0f0c29, #24243e) !important; /* Background gradient */
-    color: #ffffff; /* Warna teks footer */
-    padding: 30px 0; /* Padding untuk footer */
-    text-align: center; /* Mengatur teks agar berada di tengah */
+    background: linear-gradient(to bottom, #0f0c29, #24243e);
+    color: #ffffff;
+    padding: 30px 0;
+    text-align: center;
 }
 
 footer .social-links {
@@ -172,26 +330,15 @@ footer .social-links {
 }
 
 footer .social-links a {
-    color: #ffd700;  /* Warna teks emas untuk tautan */
+    color: #ffd700;
     font-size: 18px;
     text-decoration: none;
 }
 
 footer .social-links a:hover {
-    color: #ffffff;  /* Warna saat hover */
+    color: #ffffff;
 }
 
 footer .social-links .fa {
     margin-right: 8px;
-}
-
-/* Responsif untuk perangkat kecil */
-@media (max-width: 768px) {
-    footer p {
-        font-size: 14px;
-    }
-
-    footer .social-links a {
-        font-size: 16px;
-    }
 }

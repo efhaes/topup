@@ -37,29 +37,73 @@
 
 
 {% block content %}
+<!-- Carousel Banner Section -->
+<div id="bannerCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'images/banner1.jpg' %}" class="d-block w-100" alt="Banner 1">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="text-gold">Welcome to EfhaeStore</h5>
+                <p>Discover the best deals for your favorite games!</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'images/banner2.jpg' %}" class="d-block w-100" alt="Banner 2">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="text-gold">Fast and Secure</h5>
+                <p>Top up your games with confidence.</p>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'images/banner3.jpg' %}" class="d-block w-100" alt="Banner 3">
+            <div class="carousel-caption d-none d-md-block">
+                <h5 class="text-gold">Exclusive Offers</h5>
+                <p>Check out our limited-time discounts.</p>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
 <!-- Hero Section -->
 <section class="bg-dark text-white text-center py-5">
     <h1 class="display-4 text-gold">Welcome To EfhaeStore</h1>
     <p class="display-10 text-gold">Pilih game anda dan Top Up sekarang</p>
 </section>
 
+
 <!-- Game Grid Section -->
 <div class="container mt-5">
     <div class="row">
         {% for game in games %}
-        <div class="col-md-4 mb-4">
+        <!-- Kelas ini membuat setiap card menyesuaikan lebar layar perangkat -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4">
             <div class="card shadow-sm border-0 game-card">
-                <img src="{{ game.image.url }}" alt="{{ game.name }}" class="card-img-top" style="height: 250px; object-fit: cover;">
+                <img src="{{ game.image.url }}" alt="{{ game.name }}" class="card-img-top img-fluid" style="height: 250px; object-fit: cover;">
                 <div class="card-body bg-dark text-white">
                     <h5 class="card-title text-gold">{{ game.name }}</h5>
                     <p class="card-text">{{ game.description|slice:":100" }}...</p>
                     <a href="{% url 'game_products' game.id %}" class="btn btn-primary">lihat produk</a>
-
                 </div>
             </div>
         </div>
         {% endfor %}
     </div>
+</div>
+
+
 </div>
 {% if messages %}
     <div class="alert alert-info">
@@ -107,8 +151,3 @@
 <!-- Tambahkan link ke Bootstrap JS dan Popper.js (untuk modal, dropdown, dll.) -->
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
-
-<!-- Custom Styles -->
-
